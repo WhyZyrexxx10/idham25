@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zyrexx10 | Linux Specialist</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
+        /* ===================================== */
+        /* 1. VARIABEL & GLOBAL STYLES */
+        /* ===================================== */
         * {
             margin: 0;
             padding: 0;
@@ -14,47 +17,68 @@
         }
 
         :root {
-            --primary: #2962ff;
-            --secondary: #0039cb;
-            --accent: #00c853;
+            --primary: #4361ee; /* Biru Neon yang lebih kuat */
+            --secondary: #3a0ca3; /* Ungu/Biru Tua */
+            --accent: #00c853; /* Hijau Terang */
             --light: #f5f7fa;
-            --dark: #212529;
+            --dark: #121217; /* Hitam yang lebih halus */
             --gray: #6c757d;
             --light-gray: #e9ecef;
-            --transition: all 0.3s ease;
+            --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Kurva transisi yang lebih halus */
+            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+            --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            background: linear-gradient(135deg, var(--light) 0%, #e4edf9 100%);
             color: var(--dark);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 600;
+            font-weight: 700;
             line-height: 1.3;
         }
 
         .container {
             width: 90%;
-            max-width: 1200px;
+            max-width: 1280px; /* Lebar maksimum sedikit ditingkatkan */
             margin: 0 auto;
             padding: 0 20px;
         }
 
-        /* Header Styles */
+        section {
+            padding: 100px 0;
+            opacity: 0; /* Untuk animasi on-scroll */
+            transform: translateY(30px); /* Untuk animasi on-scroll */
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===================================== */
+        /* 2. HEADER & NAVIGASI */
+        /* ===================================== */
         header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.98); /* Lebih putih */
+            backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
             top: 0;
             z-index: 1000;
             padding: 15px 0;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-light);
         }
 
         .header-content {
@@ -65,38 +89,40 @@
 
         .logo {
             font-size: 1.8rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--primary);
         }
 
         .logo span {
-            color: var(--accent);
+            color: var(--dark);
         }
 
         .language-toggle {
-            background: var(--primary);
+            background: var(--secondary);
             color: white;
             border: none;
             padding: 8px 15px;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
             font-weight: 500;
             transition: var(--transition);
             display: flex;
             align-items: center;
             gap: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
         }
 
         .language-toggle:hover {
-            background: var(--secondary);
+            background: var(--primary);
             transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-
+        
+        /* Menu Desktop */
         nav ul {
             display: flex;
             list-style: none;
-            margin: 0;
-            padding: 0;
         }
 
         nav ul li {
@@ -112,7 +138,7 @@
             padding: 5px 0;
         }
 
-        nav ul li a:hover {
+        nav ul li a:hover, nav ul li a.active {
             color: var(--primary);
         }
 
@@ -120,100 +146,70 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 2px;
+            height: 3px; /* Garis bawah yang lebih tebal */
             background: var(--primary);
-            bottom: 0;
+            bottom: -5px;
             left: 0;
             transition: var(--transition);
+            border-radius: 2px;
         }
 
-        nav ul li a:hover::after {
+        nav ul li a:hover::after, nav ul li a.active::after {
             width: 100%;
         }
 
         .mobile-menu {
             display: none;
-            font-size: 1.5rem;
+            font-size: 1.7rem;
             cursor: pointer;
             color: var(--dark);
+            z-index: 1001;
         }
 
-        /* Hero Section */
+        /* ===================================== */
+        /* 3. HERO SECTION */
+        /* ===================================== */
         .hero {
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding-top: 80px;
+            padding-top: 120px;
+            padding-bottom: 50px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
         }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 300px;
-            height: 300px;
-            background: var(--accent);
-            opacity: 0.1;
-            border-radius: 50%;
-            z-index: -1;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 400px;
-            height: 400px;
-            background: var(--primary);
-            opacity: 0.1;
-            border-radius: 50%;
-            z-index: -1;
-        }
-
+        
         .hero-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            max-width: 1200px;
         }
 
-        .hero-text {
+        .hero-text, .hero-image {
             flex: 1;
-            padding-right: 50px;
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-
-        .hero-image {
-            flex: 1;
-            text-align: center;
-            opacity: 0;
-            transform: translateX(50px);
+            padding: 20px;
+            animation-delay: 0.3s;
         }
 
         .hero-text h1 {
-            font-size: 3.5rem;
+            font-size: 4rem;
             margin-bottom: 20px;
-            line-height: 1.2;
+            line-height: 1.1;
         }
-
+        
         .hero-text h1 span {
             color: var(--primary);
         }
 
         .hero-text p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
+            font-size: 1.25rem;
+            margin-bottom: 40px;
             color: var(--gray);
-            max-width: 600px;
+            max-width: 650px;
         }
-
+        
+        /* Tombol */
         .btn {
             display: inline-block;
             background: var(--primary);
@@ -221,64 +217,81 @@
             padding: 12px 30px;
             border-radius: 50px;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: var(--transition);
             border: 2px solid var(--primary);
             margin-right: 15px;
+            letter-spacing: 0.5px;
         }
 
         .btn:hover {
-            background: transparent;
-            color: var(--primary);
+            background: var(--secondary);
+            border-color: var(--secondary);
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 35px rgba(67, 97, 238, 0.3);
         }
 
         .btn-outline {
             background: transparent;
             color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
         }
 
         .hero-image img {
             max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            height: auto;
+            border-radius: 25px;
+            box-shadow: var(--shadow-medium);
+            transition: transform 0.5s ease;
+        }
+        
+        .hero-image img:hover {
+            transform: scale(1.02);
         }
 
-        /* About Section */
+        /* ===================================== */
+        /* 4. SECTION COMPONENTS */
+        /* ===================================== */
         .about {
-            padding: 100px 0;
             background: white;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 60px;
+            margin-bottom: 80px;
         }
 
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--dark);
             position: relative;
             display: inline-block;
             margin-bottom: 15px;
+            font-weight: 800;
         }
 
         .section-title h2::after {
             content: '';
             position: absolute;
-            width: 70px;
-            height: 3px;
+            width: 80px;
+            height: 4px;
             background: var(--primary);
-            bottom: -10px;
+            bottom: -15px;
             left: 50%;
             transform: translateX(-50%);
+            border-radius: 2px;
         }
 
         .section-title p {
             color: var(--gray);
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.1rem;
         }
 
         .about-content {
@@ -289,38 +302,44 @@
 
         .about-image {
             flex: 1;
+            text-align: center;
         }
 
         .about-image img {
             max-width: 100%;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 50%; /* Membuat gambar profil lingkaran */
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            box-shadow: var(--shadow-medium);
+            border: 5px solid white;
         }
 
         .about-text {
-            flex: 1;
+            flex: 2;
         }
 
         .about-text h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 20px;
-            color: var(--dark);
+            color: var(--primary);
+            font-weight: 700;
         }
 
         .about-text p {
             margin-bottom: 20px;
-            color: var(--gray);
+            color: var(--dark);
+            font-size: 1.05rem;
         }
 
-        /* Linux Skills Section */
+        /* Skills Card & Progress */
         .linux-skills {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            background: var(--light);
         }
 
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Menggunakan auto-fit */
             gap: 30px;
         }
 
@@ -328,44 +347,41 @@
             background: white;
             border-radius: 15px;
             padding: 30px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
+            border-left: 5px solid var(--primary); /* Sentuhan desain */
         }
 
         .skill-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .skill-card.animate {
-            animation: fadeInUp 0.8s forwards;
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
+            border-left-color: var(--accent);
         }
 
         .skill-icon {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--primary);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
 
         .skill-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
+            font-size: 1.4rem;
+            margin-bottom: 10px;
             color: var(--dark);
         }
 
         .skill-card p {
             color: var(--gray);
+            font-size: 0.95rem;
         }
 
         .progress-container {
-            margin-top: 15px;
+            margin-top: 20px;
         }
 
         .progress-bar {
-            height: 8px;
+            height: 10px;
             background: var(--light-gray);
             border-radius: 10px;
             overflow: hidden;
@@ -377,9 +393,10 @@
             border-radius: 10px;
             width: 0;
             transition: width 1.5s ease;
+            position: relative;
         }
-
-        /* Linux Distribution Cards */
+        
+        /* Distro Cards */
         .distros-container {
             display: flex;
             justify-content: center;
@@ -390,42 +407,42 @@
 
         .distro-card {
             background: white;
-            border-radius: 15px;
-            padding: 20px;
+            border-radius: 12px;
+            padding: 20px 25px;
             display: flex;
             align-items: center;
             gap: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
-            opacity: 0;
-            transform: scale(0.9);
-        }
-
-        .distro-card.animate {
-            animation: fadeInScale 0.8s forwards;
+            min-width: 250px;
         }
 
         .distro-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .distro-icon {
-            width: 50px;
-            height: 50px;
+            width: 45px;
+            height: 45px;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: var(--light-gray);
+            background: var(--primary);
             border-radius: 10px;
-            font-size: 1.5rem;
-            color: var(--primary);
+            font-size: 1.8rem;
+            color: white;
         }
+        
+        .distro-card:nth-child(2) .distro-icon { background: #E95420; } /* Ubuntu */
+        .distro-card:nth-child(3) .distro-icon { background: #A81D33; } /* Debian */
+        .distro-card:nth-child(4) .distro-icon { background: #5267A5; } /* CentOS/Fedora */
 
         .distro-info h4 {
-            font-size: 1.1rem;
-            margin-bottom: 5px;
+            font-size: 1.15rem;
+            margin-bottom: 2px;
             color: var(--dark);
+            font-weight: 600;
         }
 
         .distro-info p {
@@ -434,15 +451,14 @@
             margin: 0;
         }
 
-        /* Achievements Section */
+        /* Achievements (Timeline) */
         .achievements {
-            padding: 100px 0;
             background: white;
         }
-
+        
         .timeline {
             position: relative;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -455,6 +471,7 @@
             bottom: 0;
             left: 50%;
             margin-left: -2px;
+            border-radius: 2px;
         }
 
         .timeline-item {
@@ -462,33 +479,53 @@
             position: relative;
             width: 50%;
             box-sizing: border-box;
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .timeline-item.animate {
-            animation: fadeInUp 0.8s forwards;
         }
 
         .timeline-item:nth-child(odd) {
             left: 0;
+            clear: both; /* Penting untuk tata letak */
         }
 
         .timeline-item:nth-child(even) {
             left: 50%;
+            clear: both; /* Penting untuk tata letak */
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            right: -8px;
+            background: var(--primary);
+            border: 4px solid white;
+            top: 35px;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -8px;
         }
 
         .timeline-content {
-            padding: 20px;
-            background: white;
+            padding: 25px;
+            background: var(--light);
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-light);
+            transition: var(--transition);
+        }
+        
+        .timeline-content:hover {
+            box-shadow: var(--shadow-medium);
+            transform: translateY(-3px);
         }
 
         .timeline-content h3 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             color: var(--dark);
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-weight: 700;
         }
 
         .timeline-date {
@@ -496,69 +533,75 @@
             font-weight: 600;
             margin-bottom: 15px;
             display: block;
+            font-size: 0.95rem;
         }
 
         .timeline-content p {
             color: var(--gray);
+            font-size: 0.95rem;
         }
 
-        /* Certifications Section */
+        /* Certifications */
         .certifications {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf9 100%);
+            background: var(--light);
         }
 
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
         }
 
         .cert-card {
             background: white;
             border-radius: 15px;
-            padding: 25px;
+            padding: 30px;
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-light);
             transition: var(--transition);
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .cert-card.animate {
-            animation: fadeInUp 0.8s forwards;
         }
 
         .cert-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-medium);
         }
 
         .cert-icon {
-            font-size: 2.5rem;
+            font-size: 3rem;
             color: var(--accent);
             margin-bottom: 20px;
+            padding: 15px;
+            background: rgba(0, 200, 83, 0.1);
+            border-radius: 50%;
         }
 
         .cert-card h3 {
-            font-size: 1.3rem;
+            font-size: 1.35rem;
             margin-bottom: 10px;
             color: var(--dark);
         }
 
         .cert-card p {
             color: var(--gray);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
-
-        /* Contact Section */
+        
+        /* Contact */
         .contact {
             padding: 100px 0;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
+        }
+        
+        .contact .section-title h2, .contact .section-title p {
+            color: white;
+        }
+
+        .contact .section-title h2::after {
+            background: white;
         }
 
         .contact-container {
@@ -568,23 +611,44 @@
 
         .contact-info {
             flex: 1;
+            padding-right: 20px;
         }
 
         .contact-info h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 30px;
+            font-weight: 700;
         }
 
         .contact-item {
             display: flex;
             align-items: center;
             margin-bottom: 25px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .contact-icon {
-            font-size: 1.5rem;
-            margin-right: 15px;
-            color: #60a5fa;
+            font-size: 1.6rem;
+            margin-right: 20px;
+            color: var(--accent);
+        }
+        
+        .contact-item h4 {
+            font-size: 1.1rem;
+            margin-bottom: 2px;
+            font-weight: 600;
+        }
+        
+        .contact-item p {
+            font-size: 0.95rem;
+            color: #d1d5db;
         }
 
         .contact-form {
@@ -592,11 +656,11 @@
             background: white;
             padding: 40px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow-medium);
         }
 
         .contact-form h3 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             margin-bottom: 30px;
             color: var(--dark);
         }
@@ -609,29 +673,40 @@
             display: block;
             margin-bottom: 8px;
             color: var(--dark);
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.9rem;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px 15px;
+            padding: 14px 18px;
             border: 1px solid var(--light-gray);
-            border-radius: 8px;
+            border-radius: 10px;
             font-size: 1rem;
             transition: var(--transition);
+            background: #fcfcfc;
         }
 
         .form-control:focus {
             outline: none;
             border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
         }
 
         textarea.form-control {
             resize: vertical;
-            min-height: 120px;
+            min-height: 150px;
+        }
+        
+        .contact-form .btn {
+            width: 100%;
+            text-align: center;
+            margin-top: 10px;
         }
 
-        /* Footer */
+        /* ===================================== */
+        /* 5. FOOTER */
+        /* ===================================== */
         footer {
             background: var(--dark);
             color: white;
@@ -644,82 +719,124 @@
             flex-direction: column;
             align-items: center;
         }
+        
+        footer .logo {
+            color: white;
+        }
+        
+        footer .logo span {
+            color: var(--primary);
+        }
 
         .social-links {
-            margin: 20px 0;
+            margin: 25px 0;
             display: flex;
-            gap: 15px;
+            gap: 20px;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 45px;
+            height: 45px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             color: white;
+            font-size: 1.2rem;
             transition: var(--transition);
         }
 
         .social-links a:hover {
             background: var(--primary);
-            transform: translateY(-5px);
+            transform: rotate(10deg) scale(1.1);
         }
 
         .copyright {
             margin-top: 20px;
             color: var(--gray);
+            font-size: 0.9rem;
         }
 
-        /* Animations */
+        /* ===================================== */
+        /* 6. ANIMATIONS (dari kode asli) */
+        /* ===================================== */
         @keyframes fadeInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         @keyframes fadeInRight {
-            from {
-                opacity: 0;
-                transform: translateX(50px);
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        /* ===================================== */
+        /* 7. RESPONSIVE STYLES */
+        /* ===================================== */
+
+        /* Tablet & Layar Menengah (Max 1024px) */
+        @media (max-width: 1024px) {
+            .hero-text h1 {
+                font-size: 3.2rem;
             }
-            to {
-                opacity: 1;
-                transform: translateX(0);
+            
+            .hero-image img {
+                max-width: 90%;
+            }
+            
+            .about-image img {
+                width: 300px;
+                height: 300px;
+            }
+            
+            .contact-info {
+                padding-right: 0;
             }
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInScale {
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        /* Responsive Styles */
+        /* Tablet Kecil & Mobile Besar (Max 992px) */
         @media (max-width: 992px) {
+            .header-content {
+                padding-right: 50px; /* Ruang untuk menu mobile */
+            }
+            
+            nav {
+                display: none; /* Sembunyikan navigasi desktop */
+                position: absolute;
+                top: 70px; /* Sesuaikan dengan tinggi header */
+                right: 0;
+                width: 100%;
+                background: white;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+                padding: 20px 0;
+                border-radius: 0 0 10px 10px;
+                z-index: 999;
+                text-align: center;
+            }
+
+            nav.open {
+                display: block; /* Tampilkan saat terbuka */
+            }
+
+            nav ul {
+                flex-direction: column;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul li a {
+                display: block;
+                padding: 10px;
+                font-size: 1.1rem;
+            }
+            
+            .mobile-menu {
+                display: block;
+            }
+
             .hero-content {
                 flex-direction: column;
                 text-align: center;
@@ -730,6 +847,10 @@
                 margin-bottom: 50px;
             }
 
+            .hero-image {
+                order: -1; /* Pindahkan gambar ke atas di mobile */
+            }
+
             .about-content {
                 flex-direction: column;
             }
@@ -737,108 +858,154 @@
             .about-image {
                 margin-bottom: 30px;
             }
+            
+            .about-text {
+                flex: 1;
+            }
 
             .contact-container {
                 flex-direction: column;
             }
+            
+            .contact-info, .contact-form {
+                flex: none;
+                width: 100%;
+            }
         }
 
+        /* Mobile (Max 768px) */
         @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                text-align: center;
+            section {
+                padding: 80px 0;
             }
-
-            .logo {
-                margin-bottom: 20px;
-            }
-
-            nav ul {
-                margin-top: 20px;
-            }
-
-            nav ul li {
-                margin: 0 10px;
-            }
-
-            .mobile-menu {
-                display: block;
-                position: absolute;
-                top: 20px;
-                right: 20px;
-            }
-
-            .hero-text h1 {
+            
+            .section-title h2 {
                 font-size: 2.5rem;
             }
-
-            .section-title h2 {
-                font-size: 2rem;
+            
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-image img {
+                width: 90%;
+            }
+            
+            .about-image img {
+                width: 250px;
+                height: 250px;
             }
 
+            /* Timeline Mobile Fix */
             .timeline::after {
-                left: 31px;
+                left: 20px; /* Pindahkan garis ke kiri */
             }
 
             .timeline-item {
                 width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
+                padding-left: 50px; /* Ruang untuk titik */
+                padding-right: 15px;
             }
 
             .timeline-item:nth-child(even) {
                 left: 0;
             }
+            
+            .timeline-item::after,
+            .timeline-item:nth-child(even)::after {
+                left: 15px;
+                right: auto;
+            }
+            
+            .distro-card {
+                min-width: 100%; /* Kartu distribusi mengambil lebar penuh */
+            }
+            
+            .skill-card {
+                text-align: center;
+                border-left: none;
+                border-top: 5px solid var(--primary);
+            }
+        }
+
+        /* Mobile Kecil (Max 480px) */
+        @media (max-width: 480px) {
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+            
+            .btn {
+                display: block;
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-form {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container">
             <div class="header-content">
                 <div class="logo">Zyrexx<span>Linux</span></div>
-                <button class="language-toggle" id="langToggle">
-                    <i class="fas fa-globe"></i>
-                    <span id="currentLang">ID</span>
-                </button>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
+                
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <button class="language-toggle" id="langToggle">
+                        <i class="fas fa-globe"></i>
+                        <span id="currentLang">ID</span>
+                    </button>
+                    <div class="mobile-menu">
+                        <i class="fas fa-bars"></i>
+                    </div>
                 </div>
-                <nav>
+                
+                <nav id="main-nav">
                     <ul>
-                        <li><a href="#home" data-en="Home" data-id="Beranda">Beranda</a></li>
-                        <li><a href="#about" data-en="About" data-id="Tentang">Tentang</a></li>
-                        <li><a href="#linux-skills" data-en="Linux Skills" data-id="Keterampilan Linux">Keterampilan Linux</a></li>
-                        <li><a href="#achievements" data-en="Achievements" data-id="Prestasi">Prestasi</a></li>
-                        <li><a href="#contact" data-en="Contact" data-id="Kontak">Kontak</a></li>
+                        <li><a href="#home" class="nav-link" data-en="Home" data-id="Beranda">Beranda</a></li>
+                        <li><a href="#about" class="nav-link" data-en="About" data-id="Tentang">Tentang</a></li>
+                        <li><a href="#linux-skills" class="nav-link" data-en="Linux Skills" data-id="Keterampilan Linux">Keterampilan Linux</a></li>
+                        <li><a href="#achievements" class="nav-link" data-en="Achievements" data-id="Prestasi">Prestasi</a></li>
+                        <li><a href="#contact" class="nav-link" data-en="Contact" data-id="Kontak">Kontak</a></li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                     <h1 data-en="Hiiiiiiiiiiiiiiiiiiiiiiiiii, I'm Idham Halik" data-id="Halo, Saya Idham Halik ">Halooooo, Saya <span>Idham Halik</span></h1>
+                     <h1 data-en="Hiiiiiiiiiiiiiiiiiiiiiiiiii, I'm Idham Halik" data-id="Halo! Saya Idham Halik">Halo! Saya <span>Idham Halik</span></h1>
                     <p data-en="A Linux system administrator and DevOps engineer with expertise in server management, automation, and cloud infrastructure. I help organizations optimize their systems for performance and reliability." 
-                       data-id="Seorang administrator sistem Linux dan insinyur DevOps dengan keahlian dalam manajemen server, otomasi, dan infrastruktur cloud. Saya membantu organisasi mengoptimalkan sistem mereka untuk kinerja dan keandalan.">
-                        Seorang administrator sistem Linux dan insinyur DevOps dengan keahlian dalam manajemen server, otomasi, dan infrastruktur cloud. Saya bisa membantu organisasi mengoptimalkan sistem mereka untuk kinerja dan keandalan.
+                       data-id="Seorang Administrator Sistem Linux dan Insinyur DevOps dengan keahlian di manajemen server, otomasi, dan infrastruktur *cloud*. Saya membantu organisasi mengoptimalkan sistem mereka demi kinerja dan keandalan.">
+                        Seorang Administrator Sistem Linux dan Insinyur DevOps dengan keahlian di manajemen server, otomasi, dan infrastruktur *cloud*. Saya membantu organisasi mengoptimalkan sistem mereka demi kinerja dan keandalan.
                     </p>
                     <a href="#contact" class="btn" data-en="Get In Touch" data-id="Hubungi Saya">Hubungi Saya</a>
                     <a href="#linux-skills" class="btn btn-outline" data-en="My Linux Skills" data-id="Keterampilan Linux">Keterampilan Linux</a>
                 </div>
                 <div class="hero-image">
-                    <img src="IMG_4495.JPG" alt="images">
+                    <img src="IMG_4495.JPG" alt="Idham Halik Portrait">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
             <div class="section-title">
@@ -847,28 +1014,27 @@
             </div>
             <div class="about-content">
                 <div class="about-image">
-                    <img src="WhatsApp Image 2025-04-29 at 01.36.45_1777fe35.jpg" alt="images">
+                    <img src="WhatsApp Image 2025-04-29 at 01.36.45_1777fe35.jpg" alt="Idham Halik Profile">
                 </div>
                 <div class="about-text">
                     <h3 data-en="Who am I?" data-id="Siapa saya?">Siapa saya?</h3>
                     <p data-en="I am a Linux system administrator with approximately two years of experience managing and optimizing Linux-based infrastructure. I represented Bengkulu Province in the 2024 National Vocational High School Student Competency Competition in the IT Network System Administration field." 
-                       data-id="Saya adalah seorang administrator sistem Linux dengan lebih kurang dari 2 tahun pengalaman dalam mengelola dan mengoptimalkan infrastruktur berbasis Linux. Saya mewakili provinsi Bengkulu dalam kegiatan lomba kompetensi siswa (NASIONAL) smk pada tahun 2024 pada bidang IT NETWORK SYSTEM ADMINISTRATION.">
-                        Saya adalah seorang administrator sistem Linux dengan lebih kurang dari 2 tahun pengalaman dalam mengelola dan mengoptimalkan infrastruktur berbasis Linux. Saya mewakili provinsi Bengkulu dalam kegiatan lomba kompetensi siswa (NASIONAL) smk pada tahun 2024 pada bidang IT NETWORK SYSTEM ADMINISTRATION.
+                       data-id="Saya adalah seorang Administrator Sistem Linux dengan pengalaman kurang lebih 2 tahun dalam mengelola infrastruktur berbasis Linux. Saya mewakili Provinsi Bengkulu dalam Lomba Kompetensi Siswa (LKS) Tingkat Nasional SMK 2024 pada bidang IT Network System Administration.">
+                        Saya adalah seorang **Administrator Sistem Linux** dengan pengalaman kurang lebih 2 tahun dalam mengelola infrastruktur berbasis Linux. Saya mewakili Provinsi Bengkulu dalam **Lomba Kompetensi Siswa (LKS) Tingkat Nasional SMK 2024** pada bidang IT Network System Administration.
                     </p>
                     <p data-en="I specialize in Linux server administration, containerization with Docker and Kubernetes, cloud infrastructure on AWS, and automation using Ansible and Bash scripting. I've successfully migrated several organizations from proprietary systems to Linux, resulting in significant cost savings and improved performance." 
-                       data-id="Saya mengkhususkan diri dalam administrasi server Linux, kontainerisasi dengan Docker dan Kubernetes, infrastruktur cloud di AWS, dan otomasi menggunakan Ansible dan skrip Bash. Saya telah berhasil memigrasi beberapa organisasi dari sistem proprietary ke Linux, menghasilkan penghematan biaya yang signifikan dan peningkatan kinerja.">
-                        Saya mengkhususkan diri dalam administrasi server Linux, kontainerisasi dengan Docker dan Kubernetes, infrastruktur cloud di AWS, dan otomasi menggunakan Ansible dan skrip Bash. Saya telah berhasil memigrasi beberapa organisasi dari sistem proprietary ke Linux, menghasilkan penghematan biaya yang signifikan dan peningkatan kinerja.
+                       data-id="Saya mengkhususkan diri dalam administrasi server Linux, kontainerisasi dengan Docker & Kubernetes, infrastruktur *cloud* di AWS, dan otomasi menggunakan Ansible & Bash *scripting*. Saya berhasil memigrasi beberapa organisasi dari sistem *proprietary* ke Linux, menghasilkan penghematan biaya signifikan dan peningkatan kinerja.">
+                        Saya mengkhususkan diri dalam administrasi server Linux, kontainerisasi dengan **Docker & Kubernetes**, infrastruktur *cloud* di **AWS**, dan otomasi menggunakan **Ansible & Bash *scripting***. Saya berhasil memigrasi beberapa organisasi dari sistem *proprietary* ke Linux, menghasilkan penghematan biaya signifikan dan peningkatan kinerja.
                     </p>
                     <p data-en="When I'm not working with Linux systems, I enjoy contributing to open-source projects, writing technical articles, and mentoring junior system administrators." 
-                       data-id="Ketika saya tidak bekerja dengan sistem Linux, saya suka berkontribusi pada proyek sumber terbuka, menulis artikel teknis, dan mentoring administrator sistem junior.">
-                        Ketika saya tidak bekerja dengan sistem Linux, saya suka berkontribusi pada proyek sumber terbuka, menulis artikel teknis, dan mentoring administrator sistem junior.
+                       data-id="Ketika tidak bekerja dengan sistem Linux, saya suka berkontribusi pada proyek sumber terbuka (*open-source*), menulis artikel teknis, dan membimbing administrator sistem junior.">
+                        Ketika tidak bekerja dengan sistem Linux, saya suka berkontribusi pada proyek sumber terbuka (*open-source*), menulis artikel teknis, dan membimbing administrator sistem junior.
                     </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Linux Skills Section -->
     <section id="linux-skills" class="linux-skills">
         <div class="container">
             <div class="section-title">
@@ -912,8 +1078,8 @@
                     </div>
                     <h3 data-en="Networking" data-id="Jaringan">Jaringan</h3>
                     <p data-en="TCP/IP, DNS, DHCP, firewalls, and network security" 
-                       data-id="TCP/IP, DNS, DHCP, firewall, dan keamanan jaringan">
-                        TCP/IP, DNS, DHCP, firewall, dan keamanan jaringan
+                       data-id="TCP/IP, DNS, DHCP, *firewall*, dan keamanan jaringan">
+                        TCP/IP, DNS, DHCP, *firewall*, dan keamanan jaringan
                     </p>
                     <div class="progress-container">
                         <div class="progress-bar">
@@ -957,8 +1123,8 @@
                     </div>
                     <h3 data-en="Security" data-id="Keamanan">Keamanan</h3>
                     <p data-en="Linux security, SELinux, firewalls, and vulnerability management" 
-                       data-id="Keamanan Linux, SELinux, firewall, dan manajemen kerentanan">
-                        Keamanan Linux, SELinux, firewall, dan manajemen kerentanan
+                       data-id="Keamanan Linux, SELinux, *firewall*, dan manajemen kerentanan">
+                        Keamanan Linux, SELinux, *firewall*, dan manajemen kerentanan
                     </p>
                     <div class="progress-container">
                         <div class="progress-bar">
@@ -968,11 +1134,10 @@
                 </div>
             </div>
 
-            <!-- Linux Distributions -->
-            <h3 class="section-title" style="margin-top: 60px;">
-                <h2 data-en="Linux Distributions" data-id="Distribusi Linux">Distribusi Linux</h2>
+            <div class="section-title" style="margin-top: 80px; margin-bottom: 40px;">
+                <h2 data-en="Linux Distributions" data-id="Distribusi Linux" style="font-size: 2.2rem;">Distribusi Linux</h2>
                 <p data-en="Experience with various Linux distributions" data-id="Pengalaman dengan berbagai distribusi Linux">Pengalaman dengan berbagai distribusi Linux</p>
-            </h3>
+            </div>
             <div class="distros-container">
                 <div class="distro-card">
                     <div class="distro-icon">
@@ -980,7 +1145,7 @@
                     </div>
                     <div class="distro-info">
                         <h4 data-en="Red Hat Enterprise Linux" data-id="Red Hat Enterprise Linux">Red Hat Enterprise Linux</h4>
-                        <p data-en="Enterprise server management" data-id="Manajemen server enterprise">Manajemen server enterprise</p>
+                        <p data-en="Enterprise server management" data-id="Manajemen server *enterprise*">Manajemen server *enterprise*</p>
                     </div>
                 </div>
                 <div class="distro-card">
@@ -989,7 +1154,7 @@
                     </div>
                     <div class="distro-info">
                         <h4 data-en="Ubuntu Server" data-id="Ubuntu Server">Ubuntu Server</h4>
-                        <p data-en="Web server and cloud deployments" data-id="Penyebaran server web dan cloud">Penyebaran server web dan cloud</p>
+                        <p data-en="Web server and cloud deployments" data-id="Penyebaran server web dan *cloud*">Penyebaran server web dan *cloud*</p>
                     </div>
                 </div>
                 <div class="distro-card">
@@ -1014,7 +1179,6 @@
         </div>
     </section>
 
-    <!-- Achievements Section -->
     <section id="achievements" class="achievements">
         <div class="container">
             <div class="section-title">
@@ -1022,33 +1186,34 @@
                 <p data-en="Professional milestones and accomplishments" data-id="Milestone profesional dan pencapaian">Milestone profesional dan pencapaian</p>
             </div>
           
+            <div class="timeline">
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <span class="timeline-date" data-en="2024" data-id="2022">2024</span>
-                        <h3 data-en="FINALIS NASIONAL" data-id="FINALIS NASIONAL">FINALIS NASIONAL</h3>
+                        <span class="timeline-date" data-en="2024" data-id="2024">2024</span>
+                        <h3 data-en="NATIONAL FINALIST" data-id="FINALIS NASIONAL">FINALIS NASIONAL</h3>
                         <p data-en="NATIONAL FINALIST in the Information Technology Network System Administration (IT) category in the 2024 National Student Competency Competition (LKS) for Vocational High Schools." 
-                           data-id=" FINALIS NASIONAL bidang Teknologi Informasi Sistem Administrasi Jaringan (IT Network System Administration) pada Lomba Kompetensi Siswa (LKS) Tingkat Nasional Jenjang SMK Tahun 2024.">
-                             FINALIS NASIONAL bidang Teknologi Informasi Sistem Administrasi Jaringan (IT Network System Administration) pada Lomba Kompetensi Siswa (LKS) Tingkat Nasional Jenjang SMK Tahun 2024
+                           data-id="FINALIS NASIONAL bidang Teknologi Informasi Sistem Administrasi Jaringan (IT Network System Administration) pada Lomba Kompetensi Siswa (LKS) Tingkat Nasional Jenjang SMK Tahun 2024.">
+                             FINALIS NASIONAL bidang Teknologi Informasi Sistem Administrasi Jaringan (IT Network System Administration) pada Lomba Kompetensi Siswa (LKS) Tingkat Nasional Jenjang SMK Tahun 2024.
                         </p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
                         <span class="timeline-date" data-en="2024" data-id="2024">2024</span>
-                        <h3 data-en="winner of the vocational school student competency competition" data-id="juara lomba kompetensi siswa smk">winner of the vocational school student competency competition</h3>
+                        <h3 data-en="1st Place Provincial LKS" data-id="Juara 1 LKS Provinsi">Juara 1 LKS Provinsi</h3>
                         <p data-en="First place winner of the SMK student competency competition in the field of IT NETWORK SYSTEM AND ADMINISTRATION at the Bengkulu provincial level." 
-                           data-id="juara satu lomba kompetensi siswa smk pada bidang IT NETWORK SYSTEM ANDMINISTRATION tingkat provinsi Bengkulu.">
-                            juara satu lomba kompetensi siswa smk pada bidang IT NETWORK SYSTEM ANDMINISTRATION tingkat provinsi Bengkulu
+                           data-id="Juara Pertama Lomba Kompetensi Siswa SMK pada bidang IT NETWORK SYSTEM ANDMINISTRATION tingkat Provinsi Bengkulu.">
+                            Juara Pertama Lomba Kompetensi Siswa SMK pada bidang IT NETWORK SYSTEM ANDMINISTRATION tingkat Provinsi Bengkulu.
                         </p>
                     </div>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-content">
-                        <span class="timeline-date" data-en="2024" data-id="2020">2024</span>
-                        <h3 data-en="network olympiad champion" data-id="juara olimpiade jaringan">network olympiad champion</h3>
+                        <span class="timeline-date" data-en="2024" data-id="2024">2024</span>
+                        <h3 data-en="3rd Place Network Olympiad" data-id="Juara 3 Olimpiade Jaringan">Juara 3 Olimpiade Jaringan</h3>
                         <p data-en="3rd place winner of the network olympiad at the anniversary of SMKN 1 Bengkulu City throughout Bengkulu Province." 
-                           data-id="juara 3 olimpiade jaringan pada HUT SMKN 1 Kota Bengkulu Se-Provinsi Bengkulu.">
-                            juara 3 olimpiade jaringan pada HUT SMKN 1 Kota Bengkulu Se-Provinsi Bengkulu.
+                           data-id="Juara 3 Olimpiade Jaringan pada HUT SMKN 1 Kota Bengkulu Se-Provinsi Bengkulu.">
+                            Juara 3 Olimpiade Jaringan pada HUT SMKN 1 Kota Bengkulu Se-Provinsi Bengkulu.
                         </p>
                     </div>
                 </div>
@@ -1066,7 +1231,6 @@
         </div>
     </section>
 
-    <!-- Certifications Section -->
     <section id="certifications" class="certifications">
         <div class="container">
             <div class="section-title">
@@ -1080,8 +1244,8 @@
                     </div>
                     <h3 data-en="Red Hat Certified Engineer (RHCE)" data-id="Red Hat Certified Engineer (RHCE)">Red Hat Certified Engineer (RHCE)</h3>
                     <p data-en="Advanced Linux system administration and troubleshooting" 
-                       data-id="Administrasi sistem Linux tingkat lanjut dan troubleshooting">
-                        Administrasi sistem Linux tingkat lanjut dan troubleshooting
+                       data-id="Administrasi sistem Linux tingkat lanjut dan *troubleshooting*">
+                        Administrasi sistem Linux tingkat lanjut dan *troubleshooting*
                     </p>
                 </div>
                 <div class="cert-card">
@@ -1118,7 +1282,6 @@
         </div>
     </section>
 
-    <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
             <div class="section-title">
@@ -1127,213 +1290,4 @@
             </div>
             <div class="contact-container">
                 <div class="contact-info">
-                    <h3 data-en="Get In Touch" data-id="Kontak Saya">Kontak Saya</h3>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4 data-en="Location" data-id="Lokasi">Lokasi</h4>
-                            <p data-en="Bengkulu City, Indonesia" data-id="Kota Bengkulu, Indonesia">Bengkulu City, Indonesia</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
-                        </div>
-                        <div>
-                            <h4 data-en="Email" data-id="Email">Email</h4>
-                            <p data-en="idhamhalik2025@gmail.com" data-id="idhamhalik2025@gmail.com">idhamhalik2025@gmail.com</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4 data-en="Phone" data-id="Telepon">Telepon</h4>
-                            <p data-en="-" data-id="-">-</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-globe"></i>
-                        </div>
-                        <div>
-                            <h4 data-en="Website" data-id="Website">Website</h4>
-                            <p data-en="idham25.vercel.app" data-id="idham25.vercel.app">idham25.vercel.app</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <h3 data-en="Send Me a Message" data-id="Kirim Pesan">Kirim Pesan</h3>
-                    <form>
-                        <div class="form-group">
-                            <label for="name" data-en="Name" data-id="Nama">Nama</label>
-                            <input type="text" id="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" data-en="Email" data-id="Email">Email</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject" data-en="Subject" data-id="Subjek">Subjek</label>
-                            <input type="text" id="subject" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" data-en="Message" data-id="Pesan">Pesan</label>
-                            <textarea id="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn" data-en="Send Message" data-id="Kirim Pesan">Kirim Pesan</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="logo">Zyrexx<span>Linux</span></div>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="https://github.com/WhyZyrexxx10"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="https://www.instagram.com/idhamm03/?hl=id"><i class="fab fa-instagram"></i></a>
-                </div>
-                <p class="copyright" data-en="© 2025 Idham Halik. All Rights Reserved." data-id="© 2025 Idham Halik. Semua Hak Dilindungi.">© 2025 Idham Halik. Semua Hak Dilindungi.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Language Toggle
-        let currentLang = 'id';
-        const langToggle = document.getElementById('langToggle');
-        const currentLangSpan = document.getElementById('currentLang');
-        const langElements = document.querySelectorAll('[data-en]');
-        
-        langToggle.addEventListener('click', () => {
-            currentLang = currentLang === 'en' ? 'id' : 'en';
-            currentLangSpan.textContent = currentLang.toUpperCase();
-            updateLanguage();
-        });
-        
-        function updateLanguage() {
-            langElements.forEach(element => {
-                const text = element.getAttribute(`data-${currentLang}`);
-                if (text) {
-                    element.textContent = text;
-                }
-            });
-        }
-        
-        // Animate skills and timeline items when they come into view
-        const skillCards = document.querySelectorAll('.skill-card');
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const distroCards = document.querySelectorAll('.distro-card');
-        const certCards = document.querySelectorAll('.cert-card');
-        
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                    
-                    // Animate progress bars
-                    if (entry.target.classList.contains('skill-card')) {
-                        const progressBar = entry.target.querySelector('.progress');
-                        const width = progressBar.getAttribute('data-width');
-                        setTimeout(() => {
-                            progressBar.style.width = width + '%';
-                        }, 500);
-                    }
-                }
-            });
-        }, { threshold: 0.1 });
-        
-        skillCards.forEach(card => observer.observe(card));
-        timelineItems.forEach(item => observer.observe(item));
-        distroCards.forEach(card => observer.observe(card));
-        certCards.forEach(card => observer.observe(card));
-        
-        // Form submission
-        const form = document.querySelector('.contact-form form');
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Create notification
-            const notification = document.createElement('div');
-            notification.style.position = 'fixed';
-            notification.style.bottom = '20px';
-            notification.style.right = '20px';
-            notification.style.background = '#4361ee';
-            notification.style.color = 'white';
-            notification.style.padding = '15px 25px';
-            notification.style.borderRadius = '8px';
-            notification.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-            notification.style.zIndex = '1000';
-            notification.style.opacity = '0';
-            notification.style.transform = 'translateY(20px)';
-            notification.style.transition = 'all 0.3s ease';
-            
-            const lang = currentLang;
-            notification.textContent = lang === 'en' 
-                ? `Thank you, ${name}! Your message has been sent successfully.` 
-                : `Terima kasih, ${name}! Pesan Anda telah berhasil dikirim.`;
-            
-            document.body.appendChild(notification);
-            
-            // Show notification
-            setTimeout(() => {
-                notification.style.opacity = '1';
-                notification.style.transform = 'translateY(0)';
-            }, 100);
-            
-            // Hide notification
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateY(20px)';
-                
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 5000);
-            
-            // Reset form
-            form.reset();
-        });
-        
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-        
-        // Mobile menu toggle
-        const mobileMenu = document.querySelector('.mobile-menu');
-        const nav = document.querySelector('nav ul');
-        
-        mobileMenu.addEventListener('click', () => {
-            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
-        });
-        
-        // Animate hero text on page load
-        window.addEventListener('load', () => {
-            document.querySelector('.hero-text').style.animation = 'fadeInLeft 1s forwards';
-            document.querySelector('.hero-image').style.animation = 'fadeInRight 1s forwards';
-        });
-    </script>
-</body>
-</html>
-
+                    <h
