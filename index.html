@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Zyrexx10 | Linux Specialist</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3C!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --%3E%3Cpath fill='%234361ee' d='M256 32c142.1 0 256 93.1 256 208 0 82.2-64.8 178.3-195.4 200.7-32.9 5.8-59.6-1.5-76.3-24.8-19.1-26.6-12.7-52.7-18.1-70.1-2.7-8.9 4.3-15.3 11-20.7 70.3-64.5 120-104.7 91.1-137.9-20.8-24-65.7-9.5-89.9-18.4-23.7-8.7-32.6-32.4-16.1-51.7 15.6-18.7 54.4-19.1 72.5-38.3-1.6-4.5-5.2-11.8-9.4-15.6-39.7-36.1-99.3-19-122.9 5.4-24.6 25.8-23.9 81.3-77 101.4-12.7 4.9-21.7 4.6-28.7-1.1-29.2-23.9-63.5-39.2-105-47.5-8.4-1.7-15-2.2-22.1-4.8C65.5 190 28.3 166.4 0 131.6 0 196 256 480 256 480c0 0 256-284 256-352C512 125.1 398.1 32 256 32z'/%3E%3C/svg%3E">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
@@ -50,15 +52,15 @@
 
         .container {
             width: 90%;
-            max-width: 1280px; /* Lebar maksimum sedikit ditingkatkan */
+            max-width: 1280px; 
             margin: 0 auto;
             padding: 0 20px;
         }
 
         section {
             padding: 100px 0;
-            opacity: 0; /* Untuk animasi on-scroll */
-            transform: translateY(30px); /* Untuk animasi on-scroll */
+            opacity: 0; 
+            transform: translateY(30px); 
             transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
@@ -71,7 +73,7 @@
         /* 2. HEADER & NAVIGASI */
         /* ===================================== */
         header {
-            background: rgba(255, 255, 255, 0.98); /* Lebih putih */
+            background: rgba(255, 255, 255, 0.98); 
             backdrop-filter: blur(12px);
             position: fixed;
             width: 100%;
@@ -91,6 +93,12 @@
             font-size: 1.8rem;
             font-weight: 800;
             color: var(--primary);
+            transition: var(--transition);
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(-3deg);
+            color: var(--secondary);
         }
 
         .logo span {
@@ -146,7 +154,7 @@
             content: '';
             position: absolute;
             width: 0;
-            height: 3px; /* Garis bawah yang lebih tebal */
+            height: 3px; 
             background: var(--primary);
             bottom: -5px;
             left: 0;
@@ -159,13 +167,14 @@
         }
 
         .mobile-menu {
-            display: none;
+            display: none; 
             font-size: 1.7rem;
             cursor: pointer;
             color: var(--dark);
             z-index: 1001;
+            margin-left: 15px;
         }
-
+        
         /* ===================================== */
         /* 3. HERO SECTION */
         /* ===================================== */
@@ -242,6 +251,10 @@
             color: white;
         }
 
+        .hero-image {
+            position: relative;
+        }
+
         .hero-image img {
             max-width: 100%;
             height: auto;
@@ -254,6 +267,19 @@
             transform: scale(1.02);
         }
 
+        /* Tux Companion Animation */
+        .tux-companion {
+            position: absolute;
+            top: 20%;
+            left: -5%; 
+            font-size: 4rem;
+            color: var(--primary);
+            z-index: 10;
+            animation: slideTux 4s ease-in-out infinite;
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.1));
+            display: block; /* Default visible */
+        }
+        
         /* ===================================== */
         /* 4. SECTION COMPONENTS */
         /* ===================================== */
@@ -307,7 +333,7 @@
 
         .about-image img {
             max-width: 100%;
-            border-radius: 50%; /* Membuat gambar profil lingkaran */
+            border-radius: 50%; 
             width: 350px;
             height: 350px;
             object-fit: cover;
@@ -339,7 +365,7 @@
 
         .skills-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Menggunakan auto-fit */
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
             gap: 30px;
         }
 
@@ -350,7 +376,7 @@
             text-align: left;
             box-shadow: var(--shadow-light);
             transition: var(--transition);
-            border-left: 5px solid var(--primary); /* Sentuhan desain */
+            border-left: 5px solid var(--primary); 
         }
 
         .skill-card:hover {
@@ -434,9 +460,9 @@
             color: white;
         }
         
-        .distro-card:nth-child(2) .distro-icon { background: #E95420; } /* Ubuntu */
-        .distro-card:nth-child(3) .distro-icon { background: #A81D33; } /* Debian */
-        .distro-card:nth-child(4) .distro-icon { background: #5267A5; } /* CentOS/Fedora */
+        .distro-card:nth-child(2) .distro-icon { background: #E95420; } 
+        .distro-card:nth-child(3) .distro-icon { background: #A81D33; } 
+        .distro-card:nth-child(4) .distro-icon { background: #5267A5; } 
 
         .distro-info h4 {
             font-size: 1.15rem;
@@ -483,12 +509,12 @@
 
         .timeline-item:nth-child(odd) {
             left: 0;
-            clear: both; /* Penting untuk tata letak */
+            clear: both; 
         }
 
         .timeline-item:nth-child(even) {
             left: 50%;
-            clear: both; /* Penting untuk tata letak */
+            clear: both; 
         }
         
         .timeline-item::after {
@@ -759,7 +785,7 @@
         }
 
         /* ===================================== */
-        /* 6. ANIMATIONS (dari kode asli) */
+        /* 6. ANIMATIONS & KEYFRAMES */
         /* ===================================== */
         @keyframes fadeInLeft {
             from { opacity: 0; transform: translateX(-50px); }
@@ -771,8 +797,16 @@
             to { opacity: 1; transform: translateX(0); }
         }
         
+        @keyframes slideTux {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(5px, -10px) rotate(5deg); }
+            50% { transform: translate(-5px, 0) rotate(-5deg); }
+            75% { transform: translate(0, 10px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+
         /* ===================================== */
-        /* 7. RESPONSIVE STYLES */
+        /* 7. RESPONSIVE STYLES (Ditingkatkan) */
         /* ===================================== */
 
         /* Tablet & Layar Menengah (Max 1024px) */
@@ -793,44 +827,58 @@
             .contact-info {
                 padding-right: 0;
             }
+
+            .tux-companion {
+                font-size: 3rem;
+                top: 15%;
+                left: -10%; 
+            }
         }
 
         /* Tablet Kecil & Mobile Besar (Max 992px) */
         @media (max-width: 992px) {
             .header-content {
-                padding-right: 50px; /* Ruang untuk menu mobile */
+                padding-right: 0; 
             }
             
             nav {
-                display: none; /* Sembunyikan navigasi desktop */
-                position: absolute;
-                top: 70px; /* Sesuaikan dengan tinggi header */
+                display: none; 
+                position: fixed; /* Ubah ke fixed untuk side menu */
+                top: 75px; 
                 right: 0;
-                width: 100%;
+                width: 70%;
+                max-width: 300px;
+                height: 100vh;
                 background: white;
-                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-                padding: 20px 0;
-                border-radius: 0 0 10px 10px;
-                z-index: 999;
-                text-align: center;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+                padding: 20px;
+                border-radius: 0;
+                transform: translateX(100%); /* Sembunyikan */
+                transition: transform 0.4s ease-out;
             }
 
             nav.open {
-                display: block; /* Tampilkan saat terbuka */
+                display: block;
+                transform: translateX(0); /* Tampilkan */
             }
 
             nav ul {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
             nav ul li {
-                margin: 10px 0;
+                margin: 15px 0;
+                width: 100%;
             }
 
-            nav ul li a {
-                display: block;
-                padding: 10px;
-                font-size: 1.1rem;
+            nav ul li a::after {
+                left: 0;
+                width: 0;
+            }
+
+            nav ul li a:hover::after, nav ul li a.active::after {
+                width: 50%;
             }
             
             .mobile-menu {
@@ -845,10 +893,16 @@
             .hero-text {
                 padding-right: 0;
                 margin-bottom: 50px;
+                order: 2; /* Teks di bawah gambar */
             }
 
             .hero-image {
-                order: -1; /* Pindahkan gambar ke atas di mobile */
+                order: 1; /* Pindahkan gambar ke atas di mobile */
+                margin-bottom: 30px;
+            }
+
+            .tux-companion {
+                display: none; /* Sembunyikan animasi Tux di tablet/mobile agar tidak mengganggu tata letak */
             }
 
             .about-content {
@@ -876,38 +930,34 @@
         /* Mobile (Max 768px) */
         @media (max-width: 768px) {
             section {
-                padding: 80px 0;
+                padding: 60px 0;
             }
             
             .section-title h2 {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
             
             .hero-text h1 {
-                font-size: 2.8rem;
+                font-size: 2.5rem;
             }
             
             .hero-text p {
-                font-size: 1.1rem;
-            }
-            
-            .hero-image img {
-                width: 90%;
+                font-size: 1rem;
             }
             
             .about-image img {
-                width: 250px;
-                height: 250px;
+                width: 200px;
+                height: 200px;
             }
 
             /* Timeline Mobile Fix */
             .timeline::after {
-                left: 20px; /* Pindahkan garis ke kiri */
+                left: 10px; 
             }
 
             .timeline-item {
                 width: 100%;
-                padding-left: 50px; /* Ruang untuk titik */
+                padding-left: 40px; 
                 padding-right: 15px;
             }
 
@@ -917,31 +967,32 @@
             
             .timeline-item::after,
             .timeline-item:nth-child(even)::after {
-                left: 15px;
+                left: 5px;
                 right: auto;
             }
             
             .distro-card {
-                min-width: 100%; /* Kartu distribusi mengambil lebar penuh */
+                min-width: 100%; 
             }
             
             .skill-card {
-                text-align: center;
-                border-left: none;
-                border-top: 5px solid var(--primary);
+                text-align: left; /* Kembalikan ke kiri agar teks lebih rapi */
+                border-left: 5px solid var(--primary);
+                border-top: none; 
             }
         }
 
         /* Mobile Kecil (Max 480px) */
         @media (max-width: 480px) {
             .hero-text h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .btn {
                 display: block;
                 margin-right: 0;
                 margin-bottom: 15px;
+                width: 100%;
             }
             
             .logo {
@@ -949,11 +1000,11 @@
             }
             
             .section-title h2 {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
             
             .contact-form {
-                padding: 30px 20px;
+                padding: 25px 15px;
             }
         }
     </style>
@@ -991,7 +1042,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                     <h1 data-en="Hi, I'm Idham Halik" data-id="Halo! Saya Idham Halik">Halo! Saya <span>Idham Halik</span></h1>
+                     <h1 data-en="Hiiiiiiiiiiiiiiiiiiiiiiiiii, I'm Idham Halik" data-id="Halo! Saya Idham Halik">Halo! Saya <span>Idham Halik</span></h1>
                     <p data-en="A Linux system administrator and DevOps engineer with expertise in server management, automation, and cloud infrastructure. I help organizations optimize their systems for performance and reliability." 
                        data-id="Seorang Administrator Sistem Linux dan Insinyur DevOps dengan keahlian di manajemen server, otomasi, dan infrastruktur *cloud*. Saya membantu organisasi mengoptimalkan sistem mereka demi kinerja dan keandalan.">
                         Seorang Administrator Sistem Linux dan Insinyur DevOps dengan keahlian di manajemen server, otomasi, dan infrastruktur *cloud*. Saya membantu organisasi mengoptimalkan sistem mereka demi kinerja dan keandalan.
@@ -1001,6 +1052,7 @@
                 </div>
                 <div class="hero-image">
                     <img src="IMG_4495.JPG" alt="Idham Halik Portrait">
+                    <div class="tux-companion" id="tux-companion-element"><i class="fab fa-linux"></i></div>
                 </div>
             </div>
         </div>
@@ -1387,7 +1439,6 @@
                     element.textContent = langAttr;
                 }
             });
-            // Update Lang tag di <html>
             document.documentElement.lang = currentLang;
         }
 
@@ -1397,7 +1448,6 @@
             updateLanguage();
         });
         
-        // Panggil saat load pertama kali
         document.addEventListener('DOMContentLoaded', updateLanguage);
         
         
@@ -1410,7 +1460,7 @@
             nav.classList.toggle('open');
             const icon = mobileMenu.querySelector('i');
             icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times'); // Mengubah ikon menjadi 'X'
+            icon.classList.toggle('fa-times'); 
         });
         
         // Tutup menu saat link diklik di mobile
@@ -1434,7 +1484,7 @@
         
         const observerOptions = {
             root: null,
-            threshold: 0.1, // Mulai terlihat saat 10% elemen masuk viewport
+            threshold: 0.1, 
         };
         
         const observer = new IntersectionObserver((entries, observer) => {
@@ -1449,16 +1499,12 @@
                         const width = progressBar.getAttribute('data-width');
                         setTimeout(() => {
                             progressBar.style.width = width + '%';
-                        }, 300); // Penundaan agar terlihat lebih baik
+                        }, 300); 
                     }
-                    
-                    // Hentikan pengamatan setelah dianimasikan (opsional)
-                    // observer.unobserve(entry.target);
                 }
             });
         }, observerOptions);
         
-        // Tambahkan semua elemen yang ingin diamati
         sections.forEach(section => observer.observe(section));
         skillCards.forEach(card => observer.observe(card));
         timelineItems.forEach(item => observer.observe(item));
@@ -1467,14 +1513,13 @@
         
         // 4. Animasi Hero Section Saat Load Halaman
         window.addEventListener('load', () => {
-            // Gunakan `setTimeout` untuk memastikan CSS dimuat
             setTimeout(() => {
                 document.querySelector('.hero-text').style.animation = 'fadeInLeft 1s forwards';
                 document.querySelector('.hero-image').style.animation = 'fadeInRight 1s forwards';
             }, 100);
         });
         
-        // 5. Form Submission (dengan notifikasi yang lebih menarik)
+        // 5. Form Submission (dengan notifikasi)
         const form = document.querySelector('.contact-form form');
         form.addEventListener('submit', (e) => {
             e.preventDefault();
@@ -1487,11 +1532,10 @@
                 ? `Thank you, ${name}! Your message has been sent successfully.` 
                 : `Terima kasih, ${name}! Pesan Anda telah berhasil dikirim.`;
                 
-            // Styling Notifikasi
             notification.style.position = 'fixed';
             notification.style.bottom = '20px';
             notification.style.right = '20px';
-            notification.style.background = '#00c853'; /* Warna Accent */
+            notification.style.background = '#00c853'; 
             notification.style.color = 'white';
             notification.style.padding = '15px 25px';
             notification.style.borderRadius = '10px';
@@ -1499,17 +1543,15 @@
             notification.style.zIndex = '2000';
             notification.style.opacity = '0';
             notification.style.transform = 'translateX(100%)';
-            notification.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)'; /* Animasi pop up */
+            notification.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)'; 
             
             document.body.appendChild(notification);
             
-            // Show notification
             setTimeout(() => {
                 notification.style.opacity = '1';
                 notification.style.transform = 'translateX(0)';
             }, 100);
             
-            // Hide notification
             setTimeout(() => {
                 notification.style.opacity = '0';
                 notification.style.transform = 'translateX(100%)';
@@ -1519,11 +1561,10 @@
                 }, 500);
             }, 5000);
             
-            // Reset form
             form.reset();
         });
         
-        // 6. Active Nav Link (opsional, tetapi meningkatkan UX)
+        // 6. Active Nav Link (on scroll)
         window.addEventListener('scroll', () => {
             let current = '';
             sections.forEach(section => {
@@ -1544,4 +1585,3 @@
     </script>
 </body>
 </html>
-
