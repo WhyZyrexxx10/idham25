@@ -1290,4 +1290,257 @@
             </div>
             <div class="contact-container">
                 <div class="contact-info">
-                    <h
+                    <h3 data-en="Get In Touch" data-id="Kontak Saya">Kontak Saya</h3>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Location" data-id="Lokasi">Lokasi</h4>
+                            <p data-en="Bengkulu City, Indonesia" data-id="Kota Bengkulu, Indonesia">Kota Bengkulu, Indonesia</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Email" data-id="Email">Email</h4>
+                            <p data-en="idhamhalik2025@gmail.com" data-id="idhamhalik2025@gmail.com">idhamhalik2025@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Phone" data-id="Telepon">Telepon</h4>
+                            <p data-en="Available upon request" data-id="Tersedia berdasarkan permintaan">Tersedia berdasarkan permintaan</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div>
+                            <h4 data-en="Website" data-id="Website">Website</h4>
+                            <p data-en="idham25.vercel.app" data-id="idham25.vercel.app">idham25.vercel.app</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3 data-en="Send Me a Message" data-id="Kirim Pesan">Kirim Pesan</h3>
+                    <form>
+                        <div class="form-group">
+                            <label for="name" data-en="Name" data-id="Nama">Nama</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" data-en="Email" data-id="Email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject" data-en="Subject" data-id="Subjek">Subjek</label>
+                            <input type="text" id="subject" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" data-en="Message" data-id="Pesan">Pesan</label>
+                            <textarea id="message" class="form-control" required></textarea>
+                        </div>
+                        <button type="submit" class="btn" data-en="Send Message" data-id="Kirim Pesan">Kirim Pesan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="logo">Zyrexx<span>Linux</span></div>
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/WhyZyrexxx10" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://www.instagram.com/idhamm03/?hl=id" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="copyright" data-en="© 2025 Idham Halik. All Rights Reserved." data-id="© 2025 Idham Halik. Semua Hak Dilindungi.">© 2025 Idham Halik. Semua Hak Dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // =====================================
+        // JAVASCRIPT UNTUK FUNGSI RESPONSIVITAS & INTERAKTIF
+        // =====================================
+        
+        // 1. Language Toggle
+        let currentLang = 'id';
+        const langToggle = document.getElementById('langToggle');
+        const currentLangSpan = document.getElementById('currentLang');
+        const langElements = document.querySelectorAll('[data-en], .nav-link');
+        
+        function updateLanguage() {
+            langElements.forEach(element => {
+                const langAttr = element.getAttribute(`data-${currentLang}`);
+                if (langAttr) {
+                    element.textContent = langAttr;
+                }
+            });
+            // Update Lang tag di <html>
+            document.documentElement.lang = currentLang;
+        }
+
+        langToggle.addEventListener('click', () => {
+            currentLang = currentLang === 'en' ? 'id' : 'en';
+            currentLangSpan.textContent = currentLang.toUpperCase();
+            updateLanguage();
+        });
+        
+        // Panggil saat load pertama kali
+        document.addEventListener('DOMContentLoaded', updateLanguage);
+        
+        
+        // 2. Mobile Menu Toggle
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const nav = document.getElementById('main-nav');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        mobileMenu.addEventListener('click', () => {
+            nav.classList.toggle('open');
+            const icon = mobileMenu.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times'); // Mengubah ikon menjadi 'X'
+        });
+        
+        // Tutup menu saat link diklik di mobile
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 992) {
+                    nav.classList.remove('open');
+                    const icon = mobileMenu.querySelector('i');
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            });
+        });
+        
+        // 3. Animasi On-Scroll (Intersection Observer) & Progress Bar
+        const sections = document.querySelectorAll('section');
+        const skillCards = document.querySelectorAll('.skill-card');
+        const timelineItems = document.querySelectorAll('.timeline-item');
+        const distroCards = document.querySelectorAll('.distro-card');
+        const certCards = document.querySelectorAll('.cert-card');
+        
+        const observerOptions = {
+            root: null,
+            threshold: 0.1, // Mulai terlihat saat 10% elemen masuk viewport
+        };
+        
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Animasi Section secara umum
+                    entry.target.classList.add('visible');
+
+                    // Animasi Progress Bar untuk Skill Card
+                    if (entry.target.classList.contains('skill-card')) {
+                        const progressBar = entry.target.querySelector('.progress');
+                        const width = progressBar.getAttribute('data-width');
+                        setTimeout(() => {
+                            progressBar.style.width = width + '%';
+                        }, 300); // Penundaan agar terlihat lebih baik
+                    }
+                    
+                    // Hentikan pengamatan setelah dianimasikan (opsional)
+                    // observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+        
+        // Tambahkan semua elemen yang ingin diamati
+        sections.forEach(section => observer.observe(section));
+        skillCards.forEach(card => observer.observe(card));
+        timelineItems.forEach(item => observer.observe(item));
+        distroCards.forEach(card => observer.observe(card));
+        certCards.forEach(card => observer.observe(card));
+        
+        // 4. Animasi Hero Section Saat Load Halaman
+        window.addEventListener('load', () => {
+            // Gunakan `setTimeout` untuk memastikan CSS dimuat
+            setTimeout(() => {
+                document.querySelector('.hero-text').style.animation = 'fadeInLeft 1s forwards';
+                document.querySelector('.hero-image').style.animation = 'fadeInRight 1s forwards';
+            }, 100);
+        });
+        
+        // 5. Form Submission (dengan notifikasi yang lebih menarik)
+        const form = document.querySelector('.contact-form form');
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            
+            const notification = document.createElement('div');
+            const lang = currentLang;
+            notification.textContent = lang === 'en' 
+                ? `Thank you, ${name}! Your message has been sent successfully.` 
+                : `Terima kasih, ${name}! Pesan Anda telah berhasil dikirim.`;
+                
+            // Styling Notifikasi
+            notification.style.position = 'fixed';
+            notification.style.bottom = '20px';
+            notification.style.right = '20px';
+            notification.style.background = '#00c853'; /* Warna Accent */
+            notification.style.color = 'white';
+            notification.style.padding = '15px 25px';
+            notification.style.borderRadius = '10px';
+            notification.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            notification.style.zIndex = '2000';
+            notification.style.opacity = '0';
+            notification.style.transform = 'translateX(100%)';
+            notification.style.transition = 'all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)'; /* Animasi pop up */
+            
+            document.body.appendChild(notification);
+            
+            // Show notification
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            // Hide notification
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 500);
+            }, 5000);
+            
+            // Reset form
+            form.reset();
+        });
+        
+        // 6. Active Nav Link (opsional, tetapi meningkatkan UX)
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(a => {
+                a.classList.remove('active');
+                if (a.getAttribute('href').includes(current)) {
+                    a.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
