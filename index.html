@@ -1,180 +1,194 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Idham Halik | Portfolio</title>
+<title>Idham Halik | Cloud Architecture</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+/* ================= RESET ================= */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', monospace;
+  font-family: monospace;
 }
 
+:root {
+  --bg: #050505;
+  --card: #0b0b0b;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --primary: #3b82f6;
+  --border: rgba(255,255,255,0.25);
+}
+
+/* LIGHT MODE */
+body.light {
+  --bg: #f5f7fb;
+  --card: #ffffff;
+  --text: #020617;
+  --muted: #4b5563;
+  --primary: #2563eb;
+  --border: rgba(0,0,0,0.25);
+}
+
+/* ================= BODY ================= */
 body {
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: #e5e7eb;
-  line-height: 1.7;
-}
-
-/* ===== HERO ===== */
-.hero {
   min-height: 100vh;
+  background: radial-gradient(circle at top, var(--bg), #000);
   display: flex;
   justify-content: center;
   align-items: center;
+  color: var(--text);
+  transition: 0.3s ease;
 }
 
+/* ================= CARD ================= */
 .card {
   position: relative;
   max-width: 720px;
-  padding: 35px;
-  border-radius: 18px;
-  background: #020617;
-  border: 1px dashed rgba(255,255,255,.25);
-  box-shadow: 0 0 35px rgba(67,97,238,.25);
-  animation: fadeUp 1.2s ease forwards;
+  padding: 32px;
+  border-radius: 16px;
+  background: var(--card);
+  border: 1px dashed var(--border);
+  box-shadow: 0 0 40px rgba(59,130,246,0.25);
 }
 
+/* GLOW */
 .card::before {
   content: "";
   position: absolute;
   inset: -3px;
-  border-radius: 20px;
-  background: linear-gradient(120deg,#4361ee,#00c853,#3a0ca3);
-  filter: blur(22px);
-  opacity: .6;
+  border-radius: 18px;
+  background: linear-gradient(120deg,#3b82f6,#22c55e,#6366f1);
+  filter: blur(20px);
+  opacity: 0.6;
   z-index: -1;
   animation: glow 6s linear infinite;
 }
 
-.card h2 {
-  color: #60a5fa;
-  margin-bottom: 15px;
+/* ================= TEXT ================= */
+.title {
+  font-size: 2.2rem;
+  margin-bottom: 14px;
+  white-space: nowrap;
 }
 
-.card p {
-  color: #cbd5f5;
+.cursor {
+  color: var(--primary);
+  animation: blink 1s infinite;
 }
 
-.card a {
+.desc {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.link {
   display: inline-block;
   margin-top: 16px;
-  color: #60a5fa;
+  color: var(--primary);
   text-decoration: none;
 }
 
-/* ===== SECTION ===== */
-section {
-  padding: 90px 10%;
+/* ================= TOGGLE ================= */
+.toggle {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+  background: none;
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 8px;
+  color: var(--text);
 }
 
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 25px;
-  color: #60a5fa;
-}
-
-.about, .skills, .contact {
-  background: #020617;
-}
-
-/* ===== SKILLS ===== */
-.skills-box {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
-  gap: 20px;
-}
-
-.skill {
-  padding: 20px;
-  border-radius: 12px;
-  background: #020617;
-  border: 1px solid rgba(255,255,255,.1);
-  transition: .3s;
-}
-
-.skill:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 20px rgba(67,97,238,.3);
-}
-
-/* ===== CONTACT ===== */
-.contact p {
-  margin-bottom: 10px;
-}
-
-/* ===== ANIMATION ===== */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(30px); }
-  to { opacity: 1; transform: translateY(0); }
+/* ================= ANIM ================= */
+@keyframes blink {
+  0%, 50%, 100% { opacity: 1; }
+  25%, 75% { opacity: 0; }
 }
 
 @keyframes glow {
-  0% { filter: blur(22px) hue-rotate(0deg); }
-  100% { filter: blur(22px) hue-rotate(360deg); }
+  0% { filter: blur(20px) hue-rotate(0deg); }
+  100% { filter: blur(20px) hue-rotate(360deg); }
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="card">
-    <h2 id="typing"></h2>
-    <p>
-      I am a website developer, cloud engineer, graphic designer.
-      I learned to make a website from 2019.
-    </p>
-    <a href="#about">Click here to read more about me</a>
+<div class="card">
+  <button class="toggle" id="themeToggle">🌙</button>
+
+  <div class="title">
+    <span id="typing"></span><span class="cursor">█</span>
   </div>
+
+  <p class="desc">
+    I am a website developer, cloud engineer, graphic designer.
+    I learned to make a website from 2019.
+  </p>
+
+  <a href="#" class="link">Click here to read more about me</a>
 </div>
 
-<!-- ABOUT -->
-<section id="about" class="about">
-  <div class="section-title">About Me</div>
-  <p>
-    Halo, saya <b>Idham Halik</b>.  
-    Linux System Administrator dan DevOps enthusiast dengan pengalaman
-    server, cloud, dan automation.
-  </p>
-</section>
-
-<!-- SKILLS -->
-<section class="skills">
-  <div class="section-title">Skills</div>
-  <div class="skills-box">
-    <div class="skill">Linux Server</div>
-    <div class="skill">Docker & Kubernetes</div>
-    <div class="skill">Cloud (AWS)</div>
-    <div class="skill">Networking</div>
-    <div class="skill">Shell Scripting</div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section class="contact">
-  <div class="section-title">Contact</div>
-  <p>Email : idhamhalik2025@gmail.com</p>
-  <p>Instagram : @idhamm03</p>
-  <p>GitHub : WhyZyrexxx10</p>
-</section>
-
 <script>
-/* Typing Effect */
-const text = "Programmer Backend._";
-let i = 0;
-function typing() {
-  if (i < text.length) {
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typing, 120);
+/* ================= TYPING ================= */
+const texts = [
+  "Architecture in Cloud Computing",
+  "Linux System Administrator",
+  "DevOps & Backend Engineer"
+];
+
+let textIndex = 0;
+let charIndex = 0;
+const typingEl = document.getElementById("typing");
+
+function type() {
+  if (charIndex < texts[textIndex].length) {
+    typingEl.textContent += texts[textIndex][charIndex];
+    charIndex++;
+    setTimeout(type, 80);
+  } else {
+    setTimeout(erase, 1500);
   }
 }
-typing();
+
+function erase() {
+  if (charIndex > 0) {
+    typingEl.textContent = texts[textIndex].substring(0, charIndex - 1);
+    charIndex--;
+    setTimeout(erase, 40);
+  } else {
+    textIndex = (textIndex + 1) % texts.length;
+    setTimeout(type, 500);
+  }
+}
+
+type();
+
+/* ================= THEME ================= */
+const toggle = document.getElementById("themeToggle");
+
+if (localStorage.getItem("theme") === "light") {
+  document.body.classList.add("light");
+  toggle.textContent = "☀️";
+}
+
+toggle.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+
+  if (document.body.classList.contains("light")) {
+    localStorage.setItem("theme", "light");
+    toggle.textContent = "☀️";
+  } else {
+    localStorage.setItem("theme", "dark");
+    toggle.textContent = "🌙";
+  }
+});
 </script>
 
 </body>
