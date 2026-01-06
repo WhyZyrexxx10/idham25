@@ -1,74 +1,64 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Programmer Backend</title>
+<title>Idham Halik | Portfolio</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-/* RESET */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: monospace;
+  font-family: 'Poppins', monospace;
 }
 
-/* BACKGROUND */
 body {
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e5e7eb;
+  line-height: 1.7;
+}
+
+/* ===== HERO ===== */
+.hero {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: radial-gradient(circle at top, #0f172a, #020617);
-  color: #e5e7eb;
 }
 
-/* CARD */
 .card {
   position: relative;
-  max-width: 650px;
-  padding: 32px;
+  max-width: 720px;
+  padding: 35px;
   border-radius: 18px;
   background: #020617;
-  border: 1px dashed rgba(255,255,255,0.3);
-  box-shadow: 0 0 35px rgba(67,97,238,0.25);
+  border: 1px dashed rgba(255,255,255,.25);
+  box-shadow: 0 0 35px rgba(67,97,238,.25);
   animation: fadeUp 1.2s ease forwards;
 }
 
-/* GLOW BORDER */
 .card::before {
   content: "";
   position: absolute;
   inset: -3px;
   border-radius: 20px;
-  background: linear-gradient(
-    120deg,
-    #4361ee,
-    #00c853,
-    #3a0ca3
-  );
+  background: linear-gradient(120deg,#4361ee,#00c853,#3a0ca3);
+  filter: blur(22px);
+  opacity: .6;
   z-index: -1;
-  filter: blur(20px);
-  opacity: 0.6;
   animation: glow 6s linear infinite;
 }
 
-/* TITLE */
 .card h2 {
-  font-size: 1.4rem;
   color: #60a5fa;
-  margin-bottom: 14px;
+  margin-bottom: 15px;
 }
 
-/* TEXT */
 .card p {
-  line-height: 1.8;
-  font-size: 0.95rem;
   color: #cbd5f5;
 }
 
-/* LINK */
 .card a {
   display: inline-block;
   margin-top: 16px;
@@ -76,52 +66,107 @@ body {
   text-decoration: none;
 }
 
-.card a:hover {
-  text-decoration: underline;
+/* ===== SECTION ===== */
+section {
+  padding: 90px 10%;
 }
 
-/* HOVER EFFECT */
-.card:hover {
-  transform: translateY(-6px) scale(1.01);
-  box-shadow: 0 0 50px rgba(67,97,238,0.4);
-  transition: 0.4s ease;
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  color: #60a5fa;
 }
 
-/* ANIMATIONS */
+.about, .skills, .contact {
+  background: #020617;
+}
+
+/* ===== SKILLS ===== */
+.skills-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 20px;
+}
+
+.skill {
+  padding: 20px;
+  border-radius: 12px;
+  background: #020617;
+  border: 1px solid rgba(255,255,255,.1);
+  transition: .3s;
+}
+
+.skill:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0 20px rgba(67,97,238,.3);
+}
+
+/* ===== CONTACT ===== */
+.contact p {
+  margin-bottom: 10px;
+}
+
+/* ===== ANIMATION ===== */
 @keyframes fadeUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes glow {
-  0% { filter: blur(20px) hue-rotate(0deg); }
-  100% { filter: blur(20px) hue-rotate(360deg); }
+  0% { filter: blur(22px) hue-rotate(0deg); }
+  100% { filter: blur(22px) hue-rotate(360deg); }
 }
 </style>
 </head>
 
 <body>
 
-<div class="card">
-  <h2 id="typing"></h2>
-  <p>
-    I am a website developer, cloud engineer, graphic designer.
-    I learned to make a website from 2019.
-  </p>
-  <a href="#">Click here to read more about me</a>
+<!-- HERO -->
+<div class="hero">
+  <div class="card">
+    <h2 id="typing"></h2>
+    <p>
+      I am a website developer, cloud engineer, graphic designer.
+      I learned to make a website from 2019.
+    </p>
+    <a href="#about">Click here to read more about me</a>
+  </div>
 </div>
 
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="section-title">About Me</div>
+  <p>
+    Halo, saya <b>Idham Halik</b>.  
+    Linux System Administrator dan DevOps enthusiast dengan pengalaman
+    server, cloud, dan automation.
+  </p>
+</section>
+
+<!-- SKILLS -->
+<section class="skills">
+  <div class="section-title">Skills</div>
+  <div class="skills-box">
+    <div class="skill">Linux Server</div>
+    <div class="skill">Docker & Kubernetes</div>
+    <div class="skill">Cloud (AWS)</div>
+    <div class="skill">Networking</div>
+    <div class="skill">Shell Scripting</div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact">
+  <div class="section-title">Contact</div>
+  <p>Email : idhamhalik2025@gmail.com</p>
+  <p>Instagram : @idhamm03</p>
+  <p>GitHub : WhyZyrexxx10</p>
+</section>
+
 <script>
-/* TYPING EFFECT */
+/* Typing Effect */
 const text = "Programmer Backend._";
 let i = 0;
-
 function typing() {
   if (i < text.length) {
     document.getElementById("typing").innerHTML += text.charAt(i);
